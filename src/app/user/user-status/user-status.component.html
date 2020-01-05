@@ -1,0 +1,6 @@
+<div>
+    <a class="action" *ngIf="authService.isAuthorized" (click)="signInDialog()">signOut</a>
+    <a class="action" *ngIf="!authService.isAuthorized" (click)="signUpDialog()">signUp</a>
+    <span>&nbsp;</span>
+    <a class="action" *ngIf="!authService.isAuthorized" (click)="signInDialog()">signIn</a>
+</div>
