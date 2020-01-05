@@ -1,2 +1,15 @@
-<p>sign-in-dialog works!</p>
-<button (click)="onCloseClick()" >close</button>
+<h2>Sign In</h2>
+<form [formGroup]="signInFormGroup">
+    <mat-form-field>
+        <input type="email" matInput placeholder="email" formControlName="email" required>
+    </mat-form-field>
+
+    <mat-form-field>
+        <input type="password" matInput placeholder="password" formControlName="password" required>
+    </mat-form-field>
+
+    <div mat-dialog-actions>
+        <span class="spacer"></span>
+        <button [disabled]="signInFormGroup.invalid" mat-raised-button (click)="signIn()">SignIn</button>
+    </div>
+</form>

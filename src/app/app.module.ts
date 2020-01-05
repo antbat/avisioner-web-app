@@ -6,6 +6,11 @@ import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { UserModule } from './user/user.module';
+import { environment } from '../environments/environment';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+
+import {JwtInterceptor} from './user/interceptors/auth.interceptor';
+import {ErrorInterceptor} from './user/interceptors/error401.interceptor';
 
 @NgModule({
     declarations: [
@@ -17,7 +22,11 @@ import { UserModule } from './user/user.module';
         BrowserAnimationsModule,
         UserModule
     ],
-    providers: [],
+    providers: [
+        { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
+        { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
+        { provide: 'API_AUTH', useValue: environment.API.auth },
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule { }

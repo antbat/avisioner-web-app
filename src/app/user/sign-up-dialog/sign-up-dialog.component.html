@@ -1,2 +1,45 @@
-<p>sign-up-dialog works!</p>
-<button (click)="onCloseClick()">close</button>
+<h2>SignUp</h2>
+<mat-horizontal-stepper linear #stepper>
+    <mat-step [stepControl]="emailFormGroup" label="email">
+        <form [formGroup]="emailFormGroup">
+            <mat-form-field>
+                <input type="email" matInput placeholder="email" formControlName="email" required>
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <span class="spacer"></span>
+                <button [disabled]="emailFormGroup.invalid" mat-raised-button (click)="sendEmail(stepper)">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="confirmFormGroup" label="code">
+        <form [formGroup]="confirmFormGroup">
+            <mat-form-field>
+                <input type="text" matInput placeholder="pinCode" formControlName="emailCode" required>
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <span class="spacer"></span>
+                <button [disabled]="emailFormGroup.invalid" mat-raised-button (click)="verifyEmail(stepper)">Next</button>
+            </div>
+        </form>
+    </mat-step>
+    <mat-step [stepControl]="passwordFormGroup" label="password">
+        <form [formGroup]="passwordFormGroup">
+            <mat-form-field>
+                <input type="text" matInput placeholder="display name" formControlName="displayName" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="password" matInput placeholder="password" formControlName="password" required>
+            </mat-form-field>
+            <mat-form-field>
+                <input type="password" matInput placeholder="password again" formControlName="passwordConfirmation" required>
+            </mat-form-field>
+            <div mat-dialog-actions>
+                <button mat-button (click)="onCloseClick()">close</button>
+                <span class="spacer"></span>
+                <button mat-raised-button mat-button (click)="signUp()">SignUp</button>
+
+            </div>
+        </form>
+    </mat-step>
+</mat-horizontal-stepper>
+
