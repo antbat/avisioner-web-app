@@ -1,8 +1,9 @@
 import {Inject, Injectable} from '@angular/core';
 import { User } from '../user.model';
-import {BehaviorSubject, Observable, of} from 'rxjs';
-import {HttpClient} from '@angular/common/http';
-import {tap} from 'rxjs/operators';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError, tap} from 'rxjs/operators';
+import {SpinnerService} from '../../spinner/spinner.service';
 
 @Injectable({
     providedIn: 'root'
@@ -16,7 +17,8 @@ export class AuthService {
 
     constructor(
         private http: HttpClient,
-        @Inject('API_AUTH') private authApi: string
+        @Inject('API_AUTH') private authApi: string,
+        private spinner: SpinnerService
     ) {
         const userData = JSON.parse(localStorage.getItem(this.userStorageKey));
         if (userData) {
@@ -58,10 +60,12 @@ export class AuthService {
                     const user = new User(userData);
                     this.userUpdate(user);
                 }
-            })
+            }),
+            catchError(this.handleError)
         );
     }
     public signIn(email: string, password: string): Observable<void> {
+        this.spinner.start();
         const url = `${this.authApi}/signIn/`;
         return this.http.post(url, {email, password}).pipe(
             tap( (data: any) => {
@@ -69,7 +73,9 @@ export class AuthService {
                     this.userUpdate(data.user);
                     this.tokenUpdate(data.token);
                 }
-            })
+                this.spinner.stop();
+            }),
+
         );
     }
     public logOut() {
@@ -87,11 +93,20 @@ export class AuthService {
         localStorage.setItem(this.userStorageKey, JSON.stringify(user));
     }
 
-    private handleError<T>(operation = 'operation', result?: T) {
-        return (error: any): Observable<T> => {
-            console.error(error);
-            console.error(`${operation} failed: ${error.message}`);
-            return of(result as T);
-        };
+    private handleError(error: HttpErrorResponse) {
+        if (error.error instanceof ErrorEvent) {
+            // A client-side or network error occurred. Handle it accordingly.
+            console.error('An error occurred:', error.error.message);
+        } else {
+            // The backend returned an unsuccessful response code.
+            // The response body may contain clues as to what went wrong,
+            console.error(
+                `Backend returned code ${error.status}, ` +
+                `body was: ${error.error}`);
+        }
+        // return an observable with a user-facing error message
+        this.spinner.stop();
+        return throwError(
+            'Something bad happened; please try again later.');
     }
 }

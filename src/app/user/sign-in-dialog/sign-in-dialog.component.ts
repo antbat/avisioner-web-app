@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
+import {NotifyUserService} from '../../NotifyBySnackBars/notify-user.service';
 
 @Component({
   selector: 'app-sign-in-dialog',
@@ -14,7 +15,8 @@ export class SignInDialogComponent implements OnInit {
     constructor(
         public dialogRef: MatDialogRef<SignInDialogComponent>,
         private formBuilder: FormBuilder,
-        private authService: AuthService
+        private authService: AuthService,
+        private notifyUserService: NotifyUserService
     ) { }
 
     ngOnInit() {
@@ -33,7 +35,10 @@ export class SignInDialogComponent implements OnInit {
     signIn() {
         const email: string = this.signInFormGroup.get('email').value;
         const password: string = this.signInFormGroup.get('password').value;
-        this.authService.signIn(email, password).subscribe();
+        this.authService.signIn(email, password).subscribe(
+            () => this.notifyUserService.notify('you have successfully signed in', 10),
+            message => this.notifyUserService.notify(message, 30)
+        );
         this.dialogRef.close();
     }
     onCloseClick(): void {

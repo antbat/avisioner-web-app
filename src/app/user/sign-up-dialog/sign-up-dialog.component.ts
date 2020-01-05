@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef, MatStepper} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
+import {NotifyUserService} from '../../NotifyBySnackBars/notify-user.service';
 
 @Component({
   selector: 'app-sign-up-dialog',
@@ -17,7 +18,8 @@ export class SignUpDialogComponent implements OnInit {
     constructor(
         private authService: AuthService,
         public dialogRef: MatDialogRef<SignUpDialogComponent>,
-        private formBuilder: FormBuilder
+        private formBuilder: FormBuilder,
+        private notifyUserService: NotifyUserService
     ) { }
 
     ngOnInit() {
@@ -58,9 +60,7 @@ export class SignUpDialogComponent implements OnInit {
                 console.log(data);
                 stepper.next();
             },
-            error => {
-                console.log(error);
-            }
+            message => this.notifyUserService.notify(message, 30)
         );
     }
     verifyEmail(stepper: MatStepper) {
@@ -72,22 +72,18 @@ export class SignUpDialogComponent implements OnInit {
                 console.log(data);
                 stepper.next();
             },
-            error => {
-                console.log(error);
-            }
+            message => this.notifyUserService.notify(message, 30)
         );
     }
     signUp() {
         const displayName: string = this.passwordFormGroup.get('displayName').value;
         const password: string = this.passwordFormGroup.get('password').value;
         this.authService.signUp(displayName, password).subscribe(
-            data => {
-                console.log(data);
+            () => {
+                this.notifyUserService.notify('you have successfully signed up', 6);
                 this.dialogRef.close();
             },
-            error => {
-                console.log(error);
-            }
+            message => this.notifyUserService.notify(message, 30)
         );
     }
     onCloseClick(): void {

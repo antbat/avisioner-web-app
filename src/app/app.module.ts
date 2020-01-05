@@ -12,15 +12,22 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import {JwtInterceptor} from './user/interceptors/auth.interceptor';
 import {ErrorInterceptor} from './user/interceptors/error401.interceptor';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { SnackMessageComponent } from './NotifyBySnackBars/snack-message/snack-message.component';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        SnackMessageComponent
     ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         BrowserAnimationsModule,
-        UserModule
+        UserModule,
+        MatSnackBarModule,
+        MatProgressSpinnerModule
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },

@@ -1,5 +1,5 @@
 <div>
-    <span *ngIf="user">{{user?.displayName}}</span>
+    <span *ngIf="user"> {{user?.displayName}}&nbsp;</span>
     <a class="action" *ngIf="authService.isAuthorized" (click)="signOut()">signOut</a>
     <a class="action" *ngIf="!authService.isAuthorized" (click)="signUpDialog()">signUp</a>
     <span>&nbsp;</span>
