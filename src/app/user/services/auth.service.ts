@@ -30,7 +30,7 @@ export class AuthService {
         }
     }
     public get isAuthorized(): boolean {
-        return !! (this.user.value && this.token.value);
+        return !! (this.user && this.token && this.user.value && this.token.value);
     }
     public sendPinCodeToEmail(email: string): Observable<void> {
         const url = `${this.authApi}/signUp/email`;
