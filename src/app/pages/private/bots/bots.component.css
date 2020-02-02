@@ -1,0 +1,12 @@
+.bot-container {
+    display: flex;
+    padding: 10px 50px 10px 50px;
+    flex-wrap: wrap;
+}
+.bot-avatar {
+    width: 150px;
+}
+.mat-card {
+    margin: 10px;
+    width: 150px;
+}

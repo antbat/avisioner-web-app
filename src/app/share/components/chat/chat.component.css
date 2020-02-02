@@ -6,6 +6,7 @@
 .conversation-container {
     background-color: red;
     flex: auto 1 1;
+    position: relative;
 }
 .input-text-container {
     background-color: yellow;

@@ -9,18 +9,21 @@ import {EnglishDictionaryComponent} from './pages/private/cabinet/english-dictio
 import {NotesComponent} from './pages/private/cabinet/notes/notes.component';
 import {ContactsComponent} from './pages/private/cabinet/contacts/contacts.component';
 import {PersonalComponent} from './pages/private/cabinet/personal/personal.component';
+import {BotsComponent} from './pages/private/bots/bots.component';
 
 
 const routes: Routes = [
     { path: 'about', component: AboutComponent},
+    { path: 'bots', component: BotsComponent},
     {
         path: 'cabinet',
         component: CabinetComponent,
         canActivate: [AuthGuard],
         children: [
-            { path: 'dictionary', component: EnglishDictionaryComponent },
-            { path: 'note', component: NotesComponent },
-            { path: 'personal', component: PersonalComponent },
+            { path: '5e355482e413fb08e88f5208', component: EnglishDictionaryComponent },
+            { path: '5e355482e413fb08e88f5209', component: NotesComponent },
+            { path: '5e355482e413fb08e88f520a', component: PersonalComponent },
+            { path: '5e355482e413fb08e88f520b', component: ContactsComponent},
             { path: '', component: ContactsComponent}
         ]
     },

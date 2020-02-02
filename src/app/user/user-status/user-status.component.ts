@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material';
 import { SignInDialogComponent } from '../sign-in-dialog/sign-in-dialog.component';
 import {SignUpDialogComponent} from '../sign-up-dialog/sign-up-dialog.component';
 import {User} from '../user.model';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-user-status',
@@ -15,7 +16,8 @@ export class UserStatusComponent implements OnInit {
 
     constructor(
         public authService: AuthService,
-        public dialog: MatDialog
+        public dialog: MatDialog,
+        private route: Router
     ) { }
     ngOnInit() {
         this.authService.user.subscribe( (user: User) => {
@@ -27,8 +29,10 @@ export class UserStatusComponent implements OnInit {
         const dialogRef = this.dialog.open(SignInDialogComponent, {
             width: '350px'
         });
-        dialogRef.afterClosed().subscribe( result => {
-            console.log('dialog closed ', result);
+        dialogRef.afterClosed().subscribe( () => {
+            this.route
+                .navigate(['bots'])
+                .catch(err => console.log(err));
         });
     }
     signUpDialog() {
@@ -36,12 +40,17 @@ export class UserStatusComponent implements OnInit {
         const dialogRef = this.dialog.open(SignUpDialogComponent, {
             width: '450px'
         });
-        dialogRef.afterClosed().subscribe( result => {
-            console.log('dialog closed ', result);
+        dialogRef.afterClosed().subscribe( () => {
+            this.route
+                .navigate(['bots'])
+                .catch(err => console.log(err));
         });
     }
 
     signOut() {
         this.authService.logOut();
+        this.route
+            .navigate(['about'])
+            .catch(err => console.log(err));
     }
 }

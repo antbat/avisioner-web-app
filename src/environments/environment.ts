@@ -5,7 +5,8 @@
 export const environment = {
     production: false,
     API: {
-        auth: 'http://localhost:3000'
+        auth: 'http://localhost:3000',
+        sockets: 'http://localhost:3001'
     }
 };
 
