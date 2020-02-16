@@ -10,6 +10,7 @@ import {NotesComponent} from './pages/private/cabinet/notes/notes.component';
 import {ContactsComponent} from './pages/private/cabinet/contacts/contacts.component';
 import {PersonalComponent} from './pages/private/cabinet/personal/personal.component';
 import {BotsComponent} from './pages/private/bots/bots.component';
+import {ComplexDiagnosticComponent} from './pages/private/cabinet/complex-diagnostic/complex-diagnostic.component';
 
 
 const routes: Routes = [
@@ -24,6 +25,8 @@ const routes: Routes = [
             { path: '5e355482e413fb08e88f5209', component: NotesComponent },
             { path: '5e355482e413fb08e88f520a', component: PersonalComponent },
             { path: '5e355482e413fb08e88f520b', component: ContactsComponent},
+            { path: '5e4027757574c412d2898fc9', component: ComplexDiagnosticComponent},
+
             { path: '', component: ContactsComponent}
         ]
     },

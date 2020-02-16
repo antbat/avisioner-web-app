@@ -22,9 +22,6 @@ export class ScrollToBottomDirective {
 })
 export class ConversationComponent implements OnInit {
 
-    // @ViewChild(ScrollToBottomDirective)
-    scroll: ScrollToBottomDirective;
-
     public conversation: ChatMessage[] = [];
 
     constructor(
@@ -37,11 +34,6 @@ export class ConversationComponent implements OnInit {
             .conversation
             .subscribe( conversation => {
                 this.conversation = conversation;
-                setTimeout(()=>{
-                    const el: HTMLDivElement = this._el.nativeElement;
-                    // el.scrollTop = el.scrollHeight;
-                    el.scrollTop = Math.max(0, el.scrollHeight - el.offsetHeight);
-                }, 300);
             });
     }
 

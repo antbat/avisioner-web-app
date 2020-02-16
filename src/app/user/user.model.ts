@@ -1,7 +1,7 @@
 import {IAuthor} from '../share/Interfaces/Author';
 
 export class User implements IAuthor {
-    id?: string;
+    _id: string;
     displayName: string;
     email: string;
     firstName?: string;
@@ -10,7 +10,7 @@ export class User implements IAuthor {
 
     constructor(obj?: any) {
         this.email = obj && obj.email || '';
-        this.id = obj && obj.id;
+        this._id = obj && obj._id;
         this.displayName = obj && obj.displayName || 'unknown';
         this.firstName = obj && obj.firstName;
         this.lastName = obj && obj.lastName;

@@ -15,6 +15,8 @@ export class Bot implements IAuthor {
     rootItem?: string;
     status?: IBotStatus;
     route?: string;
+    commands: string[] = [];
+    questions: string[] = [];
 
     constructor(obj?: any) {
         this._id = obj && obj._id || '';
@@ -28,5 +30,7 @@ export class Bot implements IAuthor {
         this.rootItem = bot && bot.rootItem || '';
         this.status = bot && bot.status || IBotStatus.offLine;
         this.route = bot && bot.route || '';
+        this.commands = bot && bot.commands || [];
+        this.questions = bot && bot.questions || [];
     }
 }

@@ -12,6 +12,8 @@ import { ParticipantsComponent } from './components/participants/participants.co
 
 import { SocketIoModule} from 'ngx-socket-io';
 import { SocketService } from './services/socket/socket.service';
+import {MatButtonModule, MatCardModule, MatIconModule, MatTabsModule, MatTooltipModule} from '@angular/material';
+import { ChatMessageComponent } from './components/chat/conversation/chat-message/chat-message.component';
 
 
 @NgModule({
@@ -21,7 +23,8 @@ import { SocketService } from './services/socket/socket.service';
         ConversationComponent,
         InputTextComponent,
         ParticipantsComponent,
-        ScrollToBottomDirective
+        ScrollToBottomDirective,
+        ChatMessageComponent
     ],
     exports: [
         ChatComponent,
@@ -35,7 +38,12 @@ import { SocketService } from './services/socket/socket.service';
         RouterModule,
         SocketIoModule,
         ReactiveFormsModule,
-        FormsModule
+        FormsModule,
+        MatTabsModule,
+        MatButtonModule,
+        MatTooltipModule,
+        MatIconModule,
+        MatCardModule
     ],
     providers: [
         SocketService

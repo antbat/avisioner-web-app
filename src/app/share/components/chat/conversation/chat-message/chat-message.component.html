@@ -1,0 +1,15 @@
+<div class="container card-2" [ngClass]="{'my-message':isMyMessage, 'not-my-message':!isMyMessage}">
+    <div class="msg-header" [ngClass]="{'my-message':isMyMessage}">
+        <div class="author">{{getNameById(msg?.author)}}</div>
+    </div>
+
+    <div class="msg-body">{{msg?.text}}</div>
+    <div *ngIf="msg?.url && msg?.typeOfUrl===typeOfUrlPointer.photo">
+        <img [src]="msg?.url" alt="img data in chat message">
+    </div>
+    <div class="msg-footer">
+        <div class="type-of-msg"> {{msg?.typeOfMessage}} </div>
+        <div class="spacer"></div>
+        <div class="time-creation">{{msg?.createdAt| date:'short'}}</div>
+    </div>
+</div>

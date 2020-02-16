@@ -4,10 +4,16 @@
     flex-direction: column;
 }
 .conversation-container {
-    background-color: red;
+    background-color: white;
+    border-left: solid 1px lightgray;
+    border-right: solid 1px lightgray;
+    border-top: solid 1px lightgray;
     flex: auto 1 1;
     position: relative;
 }
 .input-text-container {
-    background-color: yellow;
+    background-color: white;
+    border-left: solid 1px lightgray;
+    border-right: solid 1px lightgray;
+
 }
