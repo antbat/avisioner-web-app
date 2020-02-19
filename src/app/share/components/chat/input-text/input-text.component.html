@@ -1,4 +1,8 @@
-<mat-tab-group mat-stretch-tabs headerPosition="below" (selectedTabChange)="tabSelected($event)">
+<mat-tab-group
+    mat-stretch-tabs
+    headerPosition="below"
+    [selectedIndex]="selectedTab|async"
+    (selectedTabChange)="tabSelected($event)">
     <mat-tab label="command">
         <div class="options-container command-container">
             <button

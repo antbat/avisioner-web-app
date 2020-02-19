@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup} from '@angular/forms';
 import {MatTabChangeEvent} from '@angular/material';
 import {Bot} from '../../../models/Bot.model';
 import {ChatService} from '../../../services/chat/chat.service';
+import {BehaviorSubject} from 'rxjs';
 
 @Component({
   selector: 'app-input-text',
@@ -15,6 +16,7 @@ export class InputTextComponent implements OnInit {
     typeMessage = TypeofMessage;
     answers: ChatMessage;
     bot: Bot;
+    selectedTab = new BehaviorSubject(0);
 
     @Output() message = new EventEmitter<ChatMessage>();
     @ViewChild('commentChatInput', {static: false}) inputCommentElement: ElementRef;
@@ -35,9 +37,12 @@ export class InputTextComponent implements OnInit {
         this.chatService.bot.subscribe( bot =>
             this.bot = bot
         );
-        this.chatService.question.subscribe( questionMessage =>
-            this.answers = questionMessage
-        );
+        this.chatService.question.subscribe( questionMessage => {
+            if (questionMessage) {
+                this.answers = questionMessage;
+                this.selectedTab.next(2);
+            }
+        });
     }
 
     sendMessage(typeOfMessage: TypeofMessage) {
@@ -63,6 +68,9 @@ export class InputTextComponent implements OnInit {
     }
 
     tabSelected($event: MatTabChangeEvent) {
+        console.log($event);
+        this.selectedTab.next($event.index);
+
         const allInputsInTabElement = [
             this.inputCommandElement,
             this.inputAskElement,

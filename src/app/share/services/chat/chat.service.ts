@@ -6,6 +6,7 @@ import {Bot} from '../../models/Bot.model';
 import {SocketService} from '../socket/socket.service';
 import {map} from 'rxjs/operators';
 import {HttpClient} from '@angular/common/http';
+import {AuthService} from '../../../user/services/auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class ChatService {
     constructor(
         private socketService: SocketService,
         private http: HttpClient,
+        private authService: AuthService,
         @Inject('API_CHAT') private chatApi: string,
     ) {
         this.socketService
@@ -69,6 +71,7 @@ export class ChatService {
         if (!msg.rootItem && this.currentRootItemId.value) {
             msg.rootItem = this.currentRootItemId.value;
         }
+        msg.author = this.authService.user.value._id;
         this.conversation.value.push(msg);
         this.socketService.emit(ChatService.eventMessageType, msg);
     }
