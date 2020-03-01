@@ -4,6 +4,7 @@ import { Bot } from '../../models/Bot.model';
 import {HttpClient} from '@angular/common/http';
 import {SpinnerService} from '../../../spinner/spinner.service';
 import { map, tap} from 'rxjs/operators';
+import {IContext} from '../../models/Context.model';
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,9 @@ export class BotService {
     public enrichBotData(bot: Bot): Observable<Bot>{
         const url = `${bot.personalSite}/enrich`;
         return this.http.get<Bot>(url);
+    }
+    public getContext(bot: Bot): Observable<IContext> {
+        const url = `${bot.personalSite}/context`;
+        return this.http.get<IContext>(url);
     }
 }

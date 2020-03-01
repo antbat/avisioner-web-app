@@ -74,8 +74,7 @@ export class AuthService {
                     this.tokenUpdate(data.token);
                 }
                 this.spinner.stop();
-            }),
-
+            })
         );
     }
     public logOut() {

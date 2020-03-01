@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Bot} from '../../../../share/models/Bot.model';
 import {ChatService} from '../../../../share/services/chat/chat.service';
 import {BotService} from '../../../../share/services/bot/bot.service';
+import {IContext} from '../../../../share/models/Context.model';
 
 @Component({
     selector: 'app-complex-diagnostic',
@@ -12,6 +13,7 @@ export class ComplexDiagnosticComponent implements OnInit {
 
     private readonly id = '5e4027757574c412d2898fc9';
     bot: Bot;
+    context: IContext;
 
     constructor(
         private chatService: ChatService,
@@ -29,6 +31,9 @@ export class ComplexDiagnosticComponent implements OnInit {
                         this.chatService.setChatWithBot(this.bot);
                     }
                 );
+                this.botService.getContext(this.bot).subscribe( context => {
+                    this.context = context;
+                });
             }
         });
     }
