@@ -10,32 +10,31 @@ import {AuthService} from '../../../../../user/services/auth.service';
     styleUrls: ['./chat-message.component.css']
 })
 export class ChatMessageComponent implements OnInit {
-    @Input() msg: ChatMessage;
+    message: ChatMessage;
+    author: string;
+    @Input() set msg(message: ChatMessage){
+        this.message = message;
+        if (message.author && this.authService.user.value._id === message.author) {
+            this.author = this.authService.user.value.displayName;
+            this.state.isMyMessage = true;
+        } else if (message.author && this.authors && this.authors.length > 0) {
+            const author = this.authors.find ( a => a._id === message.author);
+            if (author) {
+                this.author = author.displayName;
+            }
+        }
+    };
     authors: IAuthor[] = [];
-    isMyMessage = false;
-
+    state = {
+        isMyMessage: false
+    };
     typeOfUrlPointer = TypeOfUrlPointer;
     constructor(
         public chatService: ChatService,
         public authService: AuthService
     ) {
     }
-
     ngOnInit() {
-        this.chatService.participants.subscribe( authors => this.authors = authors)
+        this.chatService.participants.subscribe( authors => this.authors = authors);
     }
-    getNameById(id: string): string {
-        let name = '';
-        if (id && this.authService.user.value._id === id) {
-            name = this.authService.user.value.displayName;
-            this.isMyMessage = true;
-        } else if (id && this.authors && this.authors.length > 0) {
-            const author = this.authors.find ( a => a._id === id);
-            if (author) {
-                name = author.displayName;
-            }
-        }
-        return name;
-    }
-
 }

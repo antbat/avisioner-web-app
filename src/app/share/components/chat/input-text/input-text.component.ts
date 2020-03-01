@@ -19,11 +19,11 @@ export class InputTextComponent implements OnInit {
     selectedTab = new BehaviorSubject(0);
 
     @Output() message = new EventEmitter<ChatMessage>();
-    @ViewChild('commentChatInput', {static: false}) inputCommentElement: ElementRef;
-    @ViewChild('askChatInput', {static: false}) inputAskElement: ElementRef;
-    @ViewChild('answerChatInput', {static: false}) inputAnswerElement: ElementRef;
-    @ViewChild('commandChatInput', {static: false}) inputCommandElement: ElementRef;
-    @ViewChild('searchChatInput', {static: false}) inputSearchElement: ElementRef;
+    @ViewChild('commentChatInput') inputCommentElement: ElementRef;
+    @ViewChild('askChatInput') inputAskElement: ElementRef;
+    @ViewChild('answerChatInput') inputAnswerElement: ElementRef;
+    @ViewChild('commandChatInput') inputCommandElement: ElementRef;
+    @ViewChild('searchChatInput') inputSearchElement: ElementRef;
 
     constructor(
         private formBuilder: FormBuilder,
