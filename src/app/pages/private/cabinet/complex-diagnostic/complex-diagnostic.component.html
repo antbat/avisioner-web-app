@@ -1,1 +1,15 @@
-<pre>{{context | json}}</pre>
+<div class="top-container">
+    <div class="container">
+        <div class="box">
+            <ul>
+                <li *ngFor="let item of context?.items">{{item?.name}} {{item?.description}}</li>
+            </ul>
+            <ul>
+                <li *ngFor="let relation of context?.relations">{{relation|json}}</li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+
+<!--<pre>{{context | json}}</pre>-->

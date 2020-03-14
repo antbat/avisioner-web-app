@@ -7,7 +7,9 @@ export interface IAnswerOption {
 export enum TypeofMessage {
     question = 'question',
     answer = 'answer',
-    command = 'command'
+    command = 'command',
+    information = 'information',
+    transfer = 'transfer'
 }
 export enum TypeOfUrlPointer {
     photo = 'photo',
@@ -45,7 +47,7 @@ export class ChatMessage {
         if (obj && obj.author) {
             this.author = obj && obj.author
         }
-        this.updatedAt = obj && new Date(obj.updatedAt) || new Date();
-        this.createdAt = obj && new Date(obj.createdAt) || new Date();
+        this.updatedAt = obj && obj.updatedAt && new Date(obj.updatedAt) || new Date();
+        this.createdAt = obj && obj.createdAt && new Date(obj.createdAt) || new Date();
     }
 }

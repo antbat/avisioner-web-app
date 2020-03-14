@@ -1,5 +1,5 @@
 <!--<div class="conversation-container" #scrollMe [scrollTop]="scrollMe.scrollHeight">-->
-<div class="conversation-container" #scrollMe>
+<div class="conversation-container" id="scrollContainer">
     <div class="all-messages-container">
         <div class="message" *ngFor="let message of conversation">
             <app-chat-message [msg]="message"></app-chat-message>

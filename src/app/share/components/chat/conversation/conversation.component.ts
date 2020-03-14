@@ -1,4 +1,4 @@
-import {Component, OnInit, ElementRef, Directive } from '@angular/core';
+import {Component, OnInit, ElementRef, Directive, AfterViewInit} from '@angular/core';
 import {ChatService} from '../../../services/chat/chat.service';
 import {ChatMessage} from '../../../models/ChatMessage';
 
@@ -20,7 +20,7 @@ export class ScrollToBottomDirective {
   templateUrl: './conversation.component.html',
   styleUrls: ['./conversation.component.css']
 })
-export class ConversationComponent implements OnInit {
+export class ConversationComponent implements OnInit, AfterViewInit {
 
     public conversation: ChatMessage[] = [];
 
@@ -34,7 +34,17 @@ export class ConversationComponent implements OnInit {
             .conversation
             .subscribe( conversation => {
                 this.conversation = conversation;
+                this.scrollDown();
             });
     }
 
+    ngAfterViewInit(): void {
+        this.scrollDown();
+    }
+    scrollDown() {
+        setTimeout(()=>{
+            const container = document.getElementById("scrollContainer");
+            container.scrollTop = container.scrollHeight;
+        }, 500);
+    }
 }

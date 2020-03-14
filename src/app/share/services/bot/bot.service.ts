@@ -2,7 +2,7 @@ import {Inject, Injectable} from '@angular/core';
 import {BehaviorSubject, Observable } from 'rxjs';
 import { Bot } from '../../models/Bot.model';
 import {HttpClient} from '@angular/common/http';
-import {SpinnerService} from '../../../spinner/spinner.service';
+import {SpinnerService} from '../spinner/spinner.service';
 import { map, tap} from 'rxjs/operators';
 import {IContext} from '../../models/Context.model';
 

@@ -20,4 +20,5 @@
 }
 .document-container {
     flex: auto 1 1;
+    position: relative;
 }

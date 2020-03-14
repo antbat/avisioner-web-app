@@ -10,6 +10,7 @@ import {AuthService} from '../../../../../user/services/auth.service';
     styleUrls: ['./chat-message.component.css']
 })
 export class ChatMessageComponent implements OnInit {
+    typeOfUrlPointer = TypeOfUrlPointer;
     message: ChatMessage;
     author: string;
     @Input() set msg(message: ChatMessage){
@@ -28,7 +29,7 @@ export class ChatMessageComponent implements OnInit {
     state = {
         isMyMessage: false
     };
-    typeOfUrlPointer = TypeOfUrlPointer;
+
     constructor(
         public chatService: ChatService,
         public authService: AuthService

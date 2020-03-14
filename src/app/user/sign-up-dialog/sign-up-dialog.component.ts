@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogRef, MatStepper} from '@angular/material';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {AuthService} from '../services/auth.service';
-import {NotifyUserService} from '../../NotifyBySnackBars/notify-user.service';
+import {NotifyUserService} from '../../share/services/NotifyBySnackBars/notify-user.service';
 
 @Component({
   selector: 'app-sign-up-dialog',

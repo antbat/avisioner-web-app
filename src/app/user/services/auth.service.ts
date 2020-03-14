@@ -3,7 +3,7 @@ import { User } from '../user.model';
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError, tap} from 'rxjs/operators';
-import {SpinnerService} from '../../spinner/spinner.service';
+import {SpinnerService} from '../../share/services/spinner/spinner.service';
 
 @Injectable({
     providedIn: 'root'
