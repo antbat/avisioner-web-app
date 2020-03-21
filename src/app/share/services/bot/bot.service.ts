@@ -10,17 +10,19 @@ import {IContext} from '../../models/Context.model';
   providedIn: 'root'
 })
 export class BotService {
-    private bots = new BehaviorSubject<Bot[]>([]);
+    public myBots$ = new BehaviorSubject<Bot[]>([]);
     constructor(
         private http: HttpClient,
         @Inject('API_AUTH') private authApi: string,
         private spinner: SpinnerService
-    ) {}
+    ) {
+        this.getBots().subscribe();
+    }
     public getBots(): Observable<Bot[]> {
         const url = `${this.authApi}/user/myAvailableBots`;
         return this.http.get<Bot[]>(url).pipe(
             map(all => all.map(e => new Bot(e))),
-            tap( bots => this.bots.next(bots))
+            tap( bots => this.myBots$.next(bots))
         );
     }
     public enrichBotData(bot: Bot): Observable<Bot>{

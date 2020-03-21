@@ -1,1 +1,34 @@
-<p>search works!</p>
+<div class="header">
+    <h1>Search</h1>
+</div>
+<div class="container">
+    <app-column-list
+        class="column"
+        title="Robot"
+        url="/bots"
+        itemUrl="/robot"
+        [list]="myBots | async"
+    ></app-column-list>
+    <app-column-list
+        class="column"
+        title="Friends"
+        url="/myFriends"
+        itemUrl="/userPage"
+        [list]="myFriends | async"
+    ></app-column-list>
+    <app-column-list
+        class="column"
+        title="Group"
+        url="/bots"
+        [list]="myGroups | async"
+    ></app-column-list>
+    <div class="column">
+        <ul>
+            <li *ngFor="let room of myRooms | async">
+                <a [routerLink]="['/room', room?._id]">{{
+                    room.name | json
+                }}</a>
+            </li>
+        </ul>
+    </div>
+</div>

@@ -9,10 +9,10 @@ import { UserModule } from './user/user.module';
 import { environment } from '../environments/environment';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 
-import {JwtInterceptor} from './user/interceptors/auth.interceptor';
-import {ErrorInterceptor} from './user/interceptors/error401.interceptor';
+import { JwtInterceptor } from './user/interceptors/auth.interceptor';
+import { ErrorInterceptor } from './user/interceptors/error401.interceptor';
 
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { AboutComponent } from './pages/public/about/about.component';
@@ -20,8 +20,8 @@ import { ForbiddenComponent } from './pages/public/forbidden/forbidden.component
 import { NotFoundComponent } from './pages/public/not-found/not-found.component';
 
 import { CabinetComponent } from './pages/private/cabinet/cabinet.component';
-import { BotsComponent } from './pages/private/bots/bots.component';
-import { PrivateModule } from './pages/private/private.module';
+import { BotsComponent } from './pages/private/my-bots/bots.component';
+import { PrivateModule } from './pages/private/privatePage.module';
 import { ShareModule } from './share/share.module';
 
 

@@ -7,27 +7,32 @@ export enum TypeOfItem {
     img = 'img',
     video = 'video',
     geo = 'geo',
-    technical = 'technical'
+    technical = 'technical',
+    context = 'context',
+    projection = 'projection' // for users, for groups,
 }
 export interface IItem {
     _id?: string;
     name: string;
     description: string;
     typeOfItem: TypeOfItem;
+    tuple?: string[];
     authMarkers: string[];
+    previousVersionOf?: string;
+    data?: any;
 }
-export class Item implements  IItem {
+export class Item implements IItem {
     // tslint:disable-next-line:variable-name
-    _id?: string;
-    name: string;
-    description: string;
-    typeOfItem: TypeOfItem;
-    authMarkers: string[];
+    _id?: string
+    name: string
+    description: string
+    typeOfItem: TypeOfItem
+    authMarkers: string[]
     constructor(obj?: any) {
-        this._id = obj && obj._id || ';';
-        this.name = obj && obj.name || '';
-        this.description = obj && obj.description || '';
-        this.typeOfItem = obj && obj.typeOfItem || TypeOfItem.text;
-        this.authMarkers = obj && obj.authMarkers || [];
+        this._id = (obj && obj._id) || ';'
+        this.name = (obj && obj.name) || ''
+        this.description = (obj && obj.description) || ''
+        this.typeOfItem = (obj && obj.typeOfItem) || TypeOfItem.text
+        this.authMarkers = (obj && obj.authMarkers) || []
     }
 }

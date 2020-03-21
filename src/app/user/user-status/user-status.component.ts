@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import {AuthService} from '../services/auth.service';
+import { AuthService } from '../services/auth.service';
 import { MatDialog } from '@angular/material';
 import { SignInDialogComponent } from '../sign-in-dialog/sign-in-dialog.component';
-import {SignUpDialogComponent} from '../sign-up-dialog/sign-up-dialog.component';
-import {User} from '../user.model';
-import {Router} from '@angular/router';
+import { SignUpDialogComponent } from '../sign-up-dialog/sign-up-dialog.component';
+import { User } from '../user.model';
+import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-user-status',
-  templateUrl: './user-status.component.html',
-  styleUrls: ['./user-status.component.css']
+    selector: 'app-user-status',
+    templateUrl: './user-status.component.html',
+    styleUrls: ['./user-status.component.css']
 })
 export class UserStatusComponent implements OnInit {
     user: User;
@@ -20,7 +20,7 @@ export class UserStatusComponent implements OnInit {
         private route: Router
     ) { }
     ngOnInit() {
-        this.authService.user.subscribe( (user: User) => {
+        this.authService.user.subscribe((user: User) => {
             this.user = user;
         });
     }
@@ -29,9 +29,9 @@ export class UserStatusComponent implements OnInit {
         const dialogRef = this.dialog.open(SignInDialogComponent, {
             width: '350px'
         });
-        dialogRef.afterClosed().subscribe( () => {
+        dialogRef.afterClosed().subscribe(() => {
             this.route
-                .navigate(['bots'])
+                .navigate(['search'])
                 .catch(err => console.log(err));
         });
     }
@@ -40,9 +40,9 @@ export class UserStatusComponent implements OnInit {
         const dialogRef = this.dialog.open(SignUpDialogComponent, {
             width: '450px'
         });
-        dialogRef.afterClosed().subscribe( () => {
+        dialogRef.afterClosed().subscribe(() => {
             this.route
-                .navigate(['bots'])
+                .navigate(['search'])
                 .catch(err => console.log(err));
         });
     }

@@ -1,7 +1,12 @@
 <div class="container">
-    <div class="author-container" *ngFor="let author of participants">
-        <img class="small-avatar" src="assets/images/{{author.avatar}}" alt="">
-        <span class="small-name ">{{author.displayName}}</span>
+    <div class="author-container" *ngFor="let author of participants$ | async">
+        <img
+            class="small-avatar"
+            src="assets/images/{{ author.avatar || 'avatar.png' }}"
+            alt=""
+        />
+        <a class="small-name" [routerLink]="getUrl(author)">{{
+            author.displayName
+        }}</a>
     </div>
-    <a routerLink="/bots">...</a>
 </div>

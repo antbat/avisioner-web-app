@@ -14,6 +14,7 @@ import { SocketIoModule} from 'ngx-socket-io';
 import { SocketService } from './services/socket/socket.service';
 import {MatButtonModule, MatCardModule, MatIconModule, MatTabsModule, MatTooltipModule} from '@angular/material';
 import { ChatMessageComponent } from './components/chat/conversation/chat-message/chat-message.component';
+import { ColumnListComponent } from './components/column-list/column-list.component';
 
 
 @NgModule({
@@ -24,14 +25,16 @@ import { ChatMessageComponent } from './components/chat/conversation/chat-messag
         InputTextComponent,
         ParticipantsComponent,
         ScrollToBottomDirective,
-        ChatMessageComponent
+        ChatMessageComponent,
+        ColumnListComponent
     ],
     exports: [
         ChatComponent,
         BreadCrumbsComponent,
         ConversationComponent,
         InputTextComponent,
-        ParticipantsComponent
+        ParticipantsComponent,
+        ColumnListComponent
     ],
     imports: [
         CommonModule,
