@@ -4,13 +4,26 @@
     display: flex;
     flex-direction: column;
 }
+.internal-container {
+    display: flex;
+    flex-direction: row;
+}
+.body-message {
+    display: flex;
+    flex-direction: column;
+}
+.small-avatar {
+    height: 35px;
+    margin-right: 10px;
+}
 .my-message.container {
     margin-left: 50px;
 }
 .not-my-message {
     margin-right: 50px;
 }
-.msg-header, .msg-footer {
+.msg-header,
+.msg-footer {
     width: 100%;
     display: flex;
     flex-direction: row;
@@ -22,7 +35,9 @@
 .msg-footer {
     justify-content: flex-end;
 }
-.author, .type-of-msg, .time-creation {
+.author,
+.type-of-msg,
+.time-creation {
     font-size: x-small;
 }
 .author {
@@ -41,8 +56,8 @@
     margin: 10px 0 10px 0;
 }
 .card-2 {
-    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
 }
 .spacer {
-    flex: auto 1 1
+    flex: auto 1 1;
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core'
 import { ChatService } from '../../services/chat/chat.service'
 import { IAuthor } from '../../Interfaces/Author'
-import { IPublicUser, TypeOfUser } from '../../models/IPublicUser.interface'
+import { IPublicUser, TypeOfUser } from '../../../user/user.model'
 import { MyRoomsService } from '../../services/myRooms/my-rooms.service'
 import { Observable } from 'rxjs'
 

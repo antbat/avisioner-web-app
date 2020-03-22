@@ -1,6 +1,6 @@
 import { IBase } from './IBase';
 import { IGroup } from './Group.model';
-import { IPublicUser } from './IPublicUser.interface';
+import { IPublicUser } from './../../user/user.model';
 
 export interface IRoom extends IBase {
     name: string

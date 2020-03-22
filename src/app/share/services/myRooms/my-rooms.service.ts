@@ -6,7 +6,7 @@ import { tap } from 'rxjs/operators'
 import { IRoomDetails, IRoom } from '../../models/Room.model'
 import { IGroup } from '../../models/Group.model'
 import { IItem } from '../../models/Item.model'
-import { IPublicUser } from '../../models/IPublicUser.interface'
+import { IPublicUser } from '../../../user/user.model'
 import { ChatMessage } from '../../models/ChatMessage'
 
 @Injectable({

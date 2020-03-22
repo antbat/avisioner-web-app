@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MyRoomsService } from 'src/app/share/services/myRooms/my-rooms.service';
 import { IGroup } from 'src/app/share/models/Group.model';
-import { IPublicUser } from 'src/app/share/models/IPublicUser.interface';
+import { IPublicUser } from '../../../user/user.model';
 import { IRoom, IRoomDetails } from 'src/app/share/models/Room.model';
 import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 import { switchMap } from 'rxjs/operators';

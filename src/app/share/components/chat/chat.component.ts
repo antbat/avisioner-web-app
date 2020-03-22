@@ -25,5 +25,6 @@ export class ChatComponent implements OnInit {
     sendMessage(msg: ChatMessage) {
         msg.room = this.currentRoom$.value._id
         this.chatService.sendMessage(msg);
+
     }
 }

@@ -3,6 +3,8 @@ import { ChatMessage, TypeOfUrlPointer } from '../../../../models/ChatMessage';
 import { ChatService } from '../../../../services/chat/chat.service';
 import { IAuthor } from '../../../../Interfaces/Author';
 import { AuthService } from '../../../../../user/services/auth.service';
+import { MyRoomsService } from 'src/app/share/services/myRooms/my-rooms.service';
+import { IPublicUser } from '../../../../../user/user.model';
 
 @Component({
     selector: 'app-chat-message',
@@ -12,18 +14,20 @@ import { AuthService } from '../../../../../user/services/auth.service';
 export class ChatMessageComponent implements OnInit {
     typeOfUrlPointer = TypeOfUrlPointer;
     message: ChatMessage;
-    author: string;
+    author: IPublicUser
 
     @Input() set msg(message: ChatMessage) {
         this.message = message;
         if (message.author && this.authService.user.value._id === message.author) {
-            this.author = this.authService.user.value.displayName;
+            this.author = this.authService.user.value;
             this.state.isMyMessage = true;
-        } else if (message.author && this.authors && this.authors.length > 0) {
-            const author = this.authors.find(a => a._id === message.author);
-            if (author) {
-                this.author = author.displayName;
-            }
+        } else {
+            this.author = this.roomService
+                .currentRoomParticipants$
+                .value?.find(e =>
+                    e._id === message.author
+                )
+
         }
     };
     authors: IAuthor[] = [];
@@ -33,6 +37,7 @@ export class ChatMessageComponent implements OnInit {
 
     constructor(
         public chatService: ChatService,
+        public roomService: MyRoomsService,
         public authService: AuthService
     ) {
     }

@@ -30,12 +30,12 @@ export class ConversationComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
-        // this.chatService
-        //     .conversation
-        //     .subscribe( conversation => {
-        //         this.conversation = conversation;
-        //         this.scrollDown();
-        //     });
+        this.chatService
+            .currentConversation$
+            .subscribe(conversation => {
+                this.conversation = conversation;
+                this.scrollDown();
+            });
     }
 
     ngAfterViewInit(): void {

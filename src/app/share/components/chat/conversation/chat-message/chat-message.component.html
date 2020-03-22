@@ -1,14 +1,38 @@
-<div class="container card-2" [ngClass]="{'my-message': state.isMyMessage, 'not-my-message':! state.isMyMessage}">
-    <div class="msg-header" [ngClass]="{'my-message':  state.isMyMessage}">
-        <div class="author">{{author}}</div>
+<div
+    class="container card-2"
+    [ngClass]="{
+        'my-message': state.isMyMessage,
+        'not-my-message': !state.isMyMessage
+    }"
+>
+    <div class="internal-container">
+        <img
+            *ngIf="!state.isMyMessage"
+            class="small-avatar"
+            src="assets/images/{{ author?.avatar || 'avatar.png' }}"
+            alt="avatar"
+        />
+        <div class="body-message">
+            <div
+                class="msg-header"
+                [ngClass]="{ 'my-message': state.isMyMessage }"
+            >
+                <div class="author">{{ author?.displayName }}</div>
+            </div>
+            <div class="msg-body">{{ message?.text }}</div>
+        </div>
     </div>
-    <div class="msg-body">{{message?.text}}</div>
-<!--    <div *ngIf="message?.url && message?.typeOfUrl===typeOfUrlPointer.photo">-->
-<!--        <img [src]="message?.url" alt="img data in chat message">-->
-<!--    </div>-->
+
     <div class="msg-footer">
-        <div class="type-of-msg"> {{message?.typeOfMessage}} </div>
+        <div class="type-of-msg">{{ message?.typeOfMessage }}</div>
+
         <div class="spacer"></div>
-        <div class="time-creation">{{message?.createdAt| date:'short'}}</div>
+        <div *ngIf="message?.status" class="type-of-msg">
+            {{ message?.status }}
+        </div>
+        <div class="spacer"></div>
+        <div class="time-creation">
+            {{ message?.createdAt | date: 'short' }}
+        </div>
     </div>
 </div>

@@ -47,9 +47,11 @@ export class InputTextComponent implements OnInit {
 
     sendMessage(typeOfMessage: TypeofMessage) {
         const msg = new ChatMessage({
-            typeOfMessage, text: this.formGroup.get('text').value
+            typeOfMessage,
+            text: this.formGroup.get('text').value
         });
         this.message.next(msg);
+        this.formGroup.get('text').setValue('')
     }
     performCommand(text: string) {
         const msg = new ChatMessage({

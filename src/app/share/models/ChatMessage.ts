@@ -18,6 +18,7 @@ export enum TypeOfUrlPointer {
     file = 'file'
 }
 export class ChatMessage {
+    _id?: string;
     typeOfMessage: TypeofMessage;
     text: string;
     url?: string;
@@ -35,6 +36,8 @@ export class ChatMessage {
 
     updatedAt: Date;
     createdAt: Date;
+
+    status?: string;
 
     constructor(obj?: any) {
         this.typeOfMessage = obj && obj.typeOfMessage || TypeofMessage.question;
