@@ -25,9 +25,10 @@
     <div class="column">
         <ul>
             <li *ngFor="let room of myRooms | async">
-                <a [routerLink]="['/room', room?._id]">{{
-                    room.name | json
-                }}</a>
+                <a [routerLink]="['/room', room?._id]">
+                    <span>{{ room.name }}</span>
+                    <span>({{ room.unreadMessagesCounter$ | async }})</span></a
+                >
             </li>
         </ul>
     </div>

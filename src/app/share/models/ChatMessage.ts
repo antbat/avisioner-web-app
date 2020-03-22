@@ -20,15 +20,18 @@ export enum TypeOfUrlPointer {
 export class ChatMessage {
     typeOfMessage: TypeofMessage;
     text: string;
+    url?: string;
+    typeOfUrl?: TypeOfUrlPointer;
 
-    url: string;
-    typeOfUrl: TypeOfUrlPointer;
+    data?: any;
 
-    data: any;
+    room: string;
+    itemReference?: string;
+    author: string;
+    shouldRead: string[];
 
-    rootItem: string;
-    item: string;
-    author?: string;
+    reaction?: any;
+    affinity?: number;
 
     updatedAt: Date;
     createdAt: Date;
@@ -41,8 +44,15 @@ export class ChatMessage {
         this.typeOfUrl = obj && obj.typeOfUrl || TypeOfUrlPointer.photo;
 
         this.data = obj && obj.data || '';
-        this.rootItem = obj && obj.rootItem || '';
-        this.item = obj && obj.item || '';
+        this.room = obj && obj.room || '';
+
+        if (obj && obj.itemReference) {
+            this.itemReference = obj.itemReference
+        }
+
+        this.shouldRead = obj && obj.shouldRead || [];
+        this.reaction = obj && obj.reaction || [];
+        this.affinity = obj && obj.affinity || 0;
 
         if (obj && obj.author) {
             this.author = obj && obj.author

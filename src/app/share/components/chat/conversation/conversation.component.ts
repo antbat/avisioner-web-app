@@ -1,6 +1,6 @@
-import {Component, OnInit, ElementRef, Directive, AfterViewInit} from '@angular/core';
-import {ChatService} from '../../../services/chat/chat.service';
-import {ChatMessage} from '../../../models/ChatMessage';
+import { Component, OnInit, ElementRef, Directive, AfterViewInit } from '@angular/core';
+import { ChatService } from '../../../services/chat/chat.service';
+import { ChatMessage } from '../../../models/ChatMessage';
 
 @Directive({
     selector: '[scroll-to-bottom]'
@@ -16,9 +16,9 @@ export class ScrollToBottomDirective {
 
 
 @Component({
-  selector: 'app-conversation',
-  templateUrl: './conversation.component.html',
-  styleUrls: ['./conversation.component.css']
+    selector: 'app-conversation',
+    templateUrl: './conversation.component.html',
+    styleUrls: ['./conversation.component.css']
 })
 export class ConversationComponent implements OnInit, AfterViewInit {
 
@@ -30,19 +30,19 @@ export class ConversationComponent implements OnInit, AfterViewInit {
     ) { }
 
     ngOnInit() {
-        this.chatService
-            .conversation
-            .subscribe( conversation => {
-                this.conversation = conversation;
-                this.scrollDown();
-            });
+        // this.chatService
+        //     .conversation
+        //     .subscribe( conversation => {
+        //         this.conversation = conversation;
+        //         this.scrollDown();
+        //     });
     }
 
     ngAfterViewInit(): void {
         this.scrollDown();
     }
     scrollDown() {
-        setTimeout(()=>{
+        setTimeout(() => {
             const container = document.getElementById("scrollContainer");
             container.scrollTop = container.scrollHeight;
         }, 500);

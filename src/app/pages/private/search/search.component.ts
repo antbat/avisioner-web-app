@@ -7,6 +7,7 @@ import { IAuthor } from 'src/app/share/Interfaces/Author';
 import { MyFriendsService } from 'src/app/share/services/myFriends/my-friends.service';
 import { MyGroupsService } from 'src/app/share/services/myGroups/my-groups.service';
 import { MyRoomsService } from 'src/app/share/services/myRooms/my-rooms.service';
+import { ChatService } from 'src/app/share/services/chat/chat.service';
 
 @Component({
     selector: 'app-search',
@@ -23,7 +24,8 @@ export class SearchComponent implements OnInit {
         public botService: BotService,
         public myFriendsService: MyFriendsService,
         public myGroupsService: MyGroupsService,
-        public myRoomsService: MyRoomsService
+        public myRoomsService: MyRoomsService,
+        public chartService: ChatService
     ) { }
 
     ngOnInit(): void {
@@ -39,6 +41,7 @@ export class SearchComponent implements OnInit {
         this.myRooms = this.myRoomsService.myRooms$.pipe(
             map(rooms => rooms.map(e => {
                 e._source._id = e._id
+                e._source.unreadMessagesCounter$ = this.chartService.getCounterOfUnreadMessagesForRoom(e._id)
                 return e._source
             }))
         );

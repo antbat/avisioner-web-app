@@ -14,11 +14,11 @@ import { ChatMessage } from '../../models/ChatMessage'
 })
 export class MyRoomsService {
     public myRooms$ = new BehaviorSubject<any[]>([])
+
     public currentRoom$ = new BehaviorSubject<IRoom>(null)
     public currentRoomGroup$ = new BehaviorSubject<IGroup>(null)
-    public currentRoomRootItemContext$ = new BehaviorSubject<IItem>(null)
+    public currentRoomRootItemContext$ = new BehaviorSubject<string>(null)
     public currentRoomParticipants$ = new BehaviorSubject<IPublicUser[]>([])
-    public currentRoomMessages$ = new BehaviorSubject<ChatMessage[]>([])
 
     constructor(
         private http: HttpClient,
@@ -44,6 +44,7 @@ export class MyRoomsService {
                 this.currentRoomGroup$.next(data.group);
                 this.currentRoomParticipants$.next(data.participants);
                 this.currentRoom$.next(data.room)
+                this.currentRoomRootItemContext$.next(data.room.item)
             })
     }
 }

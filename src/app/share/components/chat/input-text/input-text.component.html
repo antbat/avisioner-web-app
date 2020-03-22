@@ -1,15 +1,23 @@
 <mat-tab-group
     mat-stretch-tabs
     headerPosition="below"
-    [selectedIndex]="selectedTab|async"
-    (selectedTabChange)="tabSelected($event)">
+    [selectedIndex]="selectedTab | async"
+    (selectedTabChange)="tabSelected($event)"
+>
+    <mat-tab label="message">
+        <form [formGroup]="formGroup" class="container">
+            <input #commentChatInput formControlName="text" type="text" />
+            <button (click)="sendMessage(typeMessage.information)">send</button>
+        </form>
+    </mat-tab>
     <mat-tab label="command">
         <div class="options-container command-container">
             <button
                 mat-button
-                *ngFor="let command of  bot?.commands"
-                (click)="performCommand(command)">
-                {{command}}
+                *ngFor="let command of bot?.commands"
+                (click)="performCommand(command)"
+            >
+                {{ command }}
             </button>
         </div>
         <form [formGroup]="formGroup" class="container">
@@ -17,13 +25,14 @@
                 #commandChatInput
                 formControlName="text"
                 type="search"
-                placeholder="filter here and click on above commands">
+                placeholder="filter here and click on above commands"
+            />
         </form>
     </mat-tab>
     <mat-tab label="ask">
         <div class="options-container ">
-            <button mat-button *ngFor="let question of  bot?.questions">
-                {{question}}
+            <button mat-button *ngFor="let question of bot?.questions">
+                {{ question }}
             </button>
         </div>
         <form [formGroup]="formGroup" class="container">
@@ -32,45 +41,46 @@
                 class="question"
                 formControlName="text"
                 type="search"
-                placeholder="filter here and click on above questions">
-            <button class="question"  (click)="sendMessage(typeMessage.question)">ask</button>
+                placeholder="filter here and click on above questions"
+            />
+            <button
+                class="question"
+                (click)="sendMessage(typeMessage.question)"
+            >
+                ask
+            </button>
         </form>
     </mat-tab>
     <mat-tab label="answer">
         <div class="container">
-            <span class="question-reminder">Question:{{answers?.text}}</span>
+            <span class="question-reminder">Question:{{ answers?.text }}</span>
         </div>
         <div class="options-container answers-container">
-            <div class="vertical-container-for-answer" *ngFor="let answer of answers?.data">
+            <div
+                class="vertical-container-for-answer"
+                *ngFor="let answer of answers?.data"
+            >
                 <button
                     mat-mini-fab
                     (click)="sendAnswer(answer)"
                     [matTooltip]="answer?.description"
-                    matTooltipPosition="above">
-                    {{answer?.label}}
+                    matTooltipPosition="above"
+                >
+                    {{ answer?.label }}
                 </button>
-                <span class="question-reminder">{{answer?.shortDescription}}</span>
+                <span class="question-reminder">{{
+                    answer?.shortDescription
+                }}</span>
             </div>
         </div>
         <form [formGroup]="formGroup" class="container">
-            <input #answerChatInput formControlName="text" type="search" placeholder="input your answer">
+            <input
+                #answerChatInput
+                formControlName="text"
+                type="search"
+                placeholder="input your answer"
+            />
             <button (click)="sendMessage(typeMessage.answer)">answer</button>
         </form>
     </mat-tab>
-
-    <mat-tab label="comment">
-        <form [formGroup]="formGroup" class="container">
-            <input #commentChatInput formControlName="text" type="text">
-            <button (click)="createComment()">send</button>
-        </form>
-    </mat-tab>
-    <mat-tab label="search">
-        <form [formGroup]="formGroup" class="container">
-            <input #searchChatInput formControlName="text" type="search" placeholder="search data in context">
-            <button (click)="navigate()">search</button>
-        </form>
-    </mat-tab>
 </mat-tab-group>
-
-
-

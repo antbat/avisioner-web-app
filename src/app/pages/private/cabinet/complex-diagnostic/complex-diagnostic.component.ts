@@ -1,8 +1,8 @@
-import {Component, OnInit} from '@angular/core';
-import {Bot} from '../../../../share/models/Bot.model';
-import {ChatService} from '../../../../share/services/chat/chat.service';
-import {BotService} from '../../../../share/services/bot/bot.service';
-import {IContext} from '../../../../share/models/Context.model';
+import { Component, OnInit } from '@angular/core';
+import { Bot } from '../../../../share/models/Bot.model';
+import { ChatService } from '../../../../share/services/chat/chat.service';
+import { BotService } from '../../../../share/services/bot/bot.service';
+import { IContext } from '../../../../share/models/Context.model';
 
 @Component({
     selector: 'app-complex-diagnostic',
@@ -28,10 +28,10 @@ export class ComplexDiagnosticComponent implements OnInit {
                 this.botService.enrichBotData(this.bot).subscribe(
                     enriched => {
                         this.bot.enrichFrom(enriched);
-                        this.chatService.setChatWithBot(this.bot);
+                        // this.chatService.setChatWithBot(this.bot);
                     }
                 );
-                this.botService.getContext(this.bot).subscribe( context => {
+                this.botService.getContext(this.bot).subscribe(context => {
                     this.context = context;
                 });
             }

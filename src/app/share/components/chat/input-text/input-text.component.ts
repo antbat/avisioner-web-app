@@ -1,15 +1,15 @@
-import {Component, OnInit, Output, EventEmitter, ViewChild, ElementRef} from '@angular/core';
-import {ChatMessage, IAnswerOption, TypeofMessage} from '../../../models/ChatMessage';
-import {FormBuilder, FormGroup} from '@angular/forms';
-import {MatTabChangeEvent} from '@angular/material';
-import {Bot} from '../../../models/Bot.model';
-import {ChatService} from '../../../services/chat/chat.service';
-import {BehaviorSubject} from 'rxjs';
+import { Component, OnInit, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { ChatMessage, IAnswerOption, TypeofMessage } from '../../../models/ChatMessage';
+import { FormBuilder, FormGroup } from '@angular/forms';
+import { MatTabChangeEvent } from '@angular/material';
+import { Bot } from '../../../models/Bot.model';
+import { ChatService } from '../../../services/chat/chat.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
-  selector: 'app-input-text',
-  templateUrl: './input-text.component.html',
-  styleUrls: ['./input-text.component.css']
+    selector: 'app-input-text',
+    templateUrl: './input-text.component.html',
+    styleUrls: ['./input-text.component.css']
 })
 export class InputTextComponent implements OnInit {
     formGroup: FormGroup;
@@ -34,10 +34,10 @@ export class InputTextComponent implements OnInit {
         this.formGroup = this.formBuilder.group({
             text: ['']
         });
-        this.chatService.bot.subscribe( bot =>
-            this.bot = bot
-        );
-        this.chatService.question.subscribe( questionMessage => {
+        // this.chatService.bot.subscribe(bot =>
+        //     this.bot = bot
+        // );
+        this.chatService.question.subscribe(questionMessage => {
             if (questionMessage) {
                 this.answers = questionMessage;
                 this.selectedTab.next(2);
@@ -55,6 +55,14 @@ export class InputTextComponent implements OnInit {
         const msg = new ChatMessage({
             typeOfMessage: TypeofMessage.command,
             text
+        });
+        this.message.next(msg);
+    }
+    sendAnswer(answer: IAnswerOption) {
+        const msg = new ChatMessage({
+            typeOfMessage: TypeofMessage.answer,
+            text: answer.label,
+            data: this.answers
         });
         this.message.next(msg);
     }
@@ -79,14 +87,5 @@ export class InputTextComponent implements OnInit {
             this.inputSearchElement
         ];
         setTimeout(() => allInputsInTabElement[$event.index].nativeElement.focus(), 500);
-    }
-
-    sendAnswer(answer: IAnswerOption) {
-        const msg = new ChatMessage({
-            typeOfMessage: TypeofMessage.answer,
-            text: answer.label,
-            data: this.answers
-        });
-        this.message.next(msg);
     }
 }

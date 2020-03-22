@@ -1,7 +1,7 @@
-import {Component, OnInit} from '@angular/core';
-import {ChatService} from '../../../../share/services/chat/chat.service';
-import {Bot} from '../../../../share/models/Bot.model';
-import {BotService} from '../../../../share/services/bot/bot.service';
+import { Component, OnInit } from '@angular/core';
+import { ChatService } from '../../../../share/services/chat/chat.service';
+import { Bot } from '../../../../share/models/Bot.model';
+import { BotService } from '../../../../share/services/bot/bot.service';
 
 @Component({
     selector: 'app-english-dictionary',
@@ -26,7 +26,7 @@ export class EnglishDictionaryComponent implements OnInit {
                 this.botService.enrichBotData(this.bot).subscribe(
                     enriched => {
                         this.bot.enrichFrom(enriched);
-                        this.chatService.setChatWithBot(this.bot);
+                        // this.chatService.setChatWithBot(this.bot);
                     }
                 );
             }
