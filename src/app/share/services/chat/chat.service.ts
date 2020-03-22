@@ -4,12 +4,13 @@ import { IAuthor } from '../../Interfaces/Author'
 import { ChatMessage, TypeofMessage } from '../../models/ChatMessage'
 import { Bot } from '../../models/Bot.model'
 import { SocketService } from '../socket/socket.service'
-import { map } from 'rxjs/operators'
+import { map, switchMap } from 'rxjs/operators'
 import { HttpClient } from '@angular/common/http'
 import { AuthService } from '../../../user/services/auth.service'
 import { MyRoomsService } from '../myRooms/my-rooms.service'
 import { IRoom } from '../../models/Room.model'
 import { CdkStepperNext } from '@angular/cdk/stepper'
+import { triggerAsyncId } from 'async_hooks'
 
 @Injectable({
     providedIn: 'root'
@@ -17,6 +18,7 @@ import { CdkStepperNext } from '@angular/cdk/stepper'
 export class ChatService {
     static readonly eventMessageType = 'message'
     static readonly unreadStats = 'unreadStats'
+    static readonly changeStatus = 'changeStatus'
 
     public currentRoom$ = new BehaviorSubject<IRoom>(null)
     public question = new BehaviorSubject<ChatMessage>(null)
@@ -35,8 +37,7 @@ export class ChatService {
         this.currentRoom$ = this.roomService.currentRoom$
 
         // get and process all messanges here
-        this.socketService
-            .fromEvent<string>(ChatService.eventMessageType)
+        this.socketService.fromEvent<string>(ChatService.eventMessageType)
             .pipe(
                 map(data => {
                     const msg = JSON.parse(data)
@@ -61,8 +62,7 @@ export class ChatService {
 
         // get start counters of unread messages
         // just first message after connection to socket.io chat
-        this.socketService
-            .fromEvent<any>(ChatService.unreadStats)
+        this.socketService.fromEvent<any>(ChatService.unreadStats)
             .subscribe(data => {
                 data?.body?.aggregations?.rooms?.buckets.forEach(bucket => {
                     if (!this.unreadMessagesByRooms.has(bucket.key)) {
@@ -74,6 +74,15 @@ export class ChatService {
                     const counter = this.unreadMessagesByRooms.get(bucket.key)
                     counter.next(bucket.doc_count)
                 })
+            })
+
+        this.socketService
+            .fromEvent<any>(ChatService.changeStatus)
+            .pipe(switchMap(report =>
+                this.getMessageById(report.messageToUpdate)
+            ))
+            .subscribe(updatedMessage => {
+                this.updateMessageInConveration(updatedMessage)
             })
 
         this.currentRoom$.subscribe((room: IRoom) => {
@@ -95,6 +104,14 @@ export class ChatService {
         })
     }
 
+    getMessageById(id: string): Observable<ChatMessage> {
+        const url = this.chatApi + `/conversation/message/${id}`
+        return this.http
+            .get<ChatMessage[]>(url)
+            .pipe(
+                map(msg => new ChatMessage(msg))
+            )
+    }
     getConversationByRoom(roomId: string): Observable<ChatMessage[]> {
         const url = this.chatApi + `/conversation?room=${roomId}`
         return this.http
@@ -130,5 +147,27 @@ export class ChatService {
         const conversation = this.currentConversation$.value
         conversation.push(msg)
         this.currentConversation$.next(conversation)
+
+        if (msg.author !== this.authService.user.value._id) {
+            // there was reading of not my message
+            // async, don't wait
+            this.changeStatusMessage({
+                hasBeenSeen: true,
+                messageId: msg._id
+            })
+        }
+
+    }
+    public async changeStatusMessage(report: any) {
+        const url = this.chatApi + `/conversation/changeStatusMessage`
+        this.http.post<ChatMessage>(url, report).subscribe(() => { })
+    }
+    public updateMessageInConveration(msg: ChatMessage) {
+        // find by update
+        const index = this.currentConversation$.value.findIndex(e => e._id === msg._id)
+        if (index !== -1) {
+            this.currentConversation$.value[index] = msg
+        }
+        console.log('update message')
     }
 }

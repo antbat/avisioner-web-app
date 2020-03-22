@@ -27,9 +27,11 @@
         <div class="type-of-msg">{{ message?.typeOfMessage }}</div>
 
         <div class="spacer"></div>
+        <div class="type-of-msg">{{ whoReadThisMessage }}</div>
         <div *ngIf="message?.status" class="type-of-msg">
             {{ message?.status }}
         </div>
+
         <div class="spacer"></div>
         <div class="time-creation">
             {{ message?.createdAt | date: 'short' }}

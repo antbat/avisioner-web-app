@@ -40,6 +40,10 @@ export class ChatMessage {
     status?: string;
 
     constructor(obj?: any) {
+
+        if (obj && obj._id) {
+            this._id = obj._id
+        }
         this.typeOfMessage = obj && obj.typeOfMessage || TypeofMessage.question;
         this.text = obj && obj.text || '';
 
