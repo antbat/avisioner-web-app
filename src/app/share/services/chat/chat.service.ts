@@ -9,8 +9,6 @@ import { HttpClient } from '@angular/common/http'
 import { AuthService } from '../../../user/services/auth.service'
 import { MyRoomsService } from '../myRooms/my-rooms.service'
 import { IRoom } from '../../models/Room.model'
-import { CdkStepperNext } from '@angular/cdk/stepper'
-import { triggerAsyncId } from 'async_hooks'
 
 @Injectable({
     providedIn: 'root'

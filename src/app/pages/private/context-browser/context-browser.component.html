@@ -3,8 +3,11 @@
     <div class="panels-container">
         <app-participants></app-participants>
         <app-chat class="chat-container"></app-chat>
-        <div class="document-container">
-            <router-outlet></router-outlet>
-        </div>
+        <app-internal-context-container
+            class="document-container"
+        ></app-internal-context-container>
+        <app-external-contexts-container
+            class="document-container"
+        ></app-external-contexts-container>
     </div>
 </div>

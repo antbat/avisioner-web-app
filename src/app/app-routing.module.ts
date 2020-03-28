@@ -21,11 +21,31 @@ import { UserPageComponent } from './pages/private/my-friends/user-page/user-pag
 const routes: Routes = [
     { path: 'about', component: AboutComponent },
     { path: 'bots', component: BotsComponent },
-    { path: 'search', component: SearchComponent },
-    { path: 'myFriends', component: MyFriendsComponent },
-    { path: 'userPage/:id', component: UserPageComponent },
-    { path: 'room/:id', component: ContextBrowserComponent },
-    { path: 'robot/:id', component: RobotComponent },
+    {
+        path: 'search',
+        component: SearchComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'myFriends',
+        component: MyFriendsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'userPage/:id',
+        component: UserPageComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'room/:id',
+        component: ContextBrowserComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'robot/:id',
+        component: RobotComponent,
+        canActivate: [AuthGuard]
+    },
     {
         path: 'cabinet',
         component: CabinetComponent,
