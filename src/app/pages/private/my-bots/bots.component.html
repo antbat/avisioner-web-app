@@ -1,13 +1,21 @@
 <h1>Bots garage</h1>
 <div class="bot-container">
-    <mat-card *ngFor="let bot of bots" routerLink="/cabinet/{{bot?._id}}">
+    <mat-card
+        *ngFor="let bot of bots$ | async"
+        routerLink="/cabinet/{{ bot?._id }}"
+    >
         <mat-card-header>
-            <mat-card-title>{{bot?.displayName}}</mat-card-title>
+            <mat-card-title>{{ bot?.displayName }}</mat-card-title>
         </mat-card-header>
-        <img class="bot-avatar" mat-card-image src="assets/images/{{bot?.avatar}}" alt="bot avatar">
+        <img
+            class="bot-avatar"
+            mat-card-image
+            src="assets/images/{{ bot?.avatar }}"
+            alt="bot avatar"
+        />
         <mat-card-content>
-            <p>{{bot?.description}}</p>
-            <p>{{bot?.status}}</p>
+            <p>{{ bot?.description }}</p>
+            <p>{{ bot?.status }}</p>
         </mat-card-content>
     </mat-card>
 </div>

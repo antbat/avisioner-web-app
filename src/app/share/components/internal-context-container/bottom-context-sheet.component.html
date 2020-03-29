@@ -1,19 +1,14 @@
-<h3>create new item data</h3>
-<mat-nav-list>
-    <a mat-list-item (click)="openLink($event)">
-        <span mat-line>NoteBot:</span>
-        <span mat-line>create new <b>note</b></span>
-    </a>
-    <a mat-list-item (click)="openLink($event)">
-        <span mat-line>TargetBot:</span>
-        <span mat-line>create new target</span>
-    </a>
-    <a mat-list-item (click)="openLink($event)">
-        <span mat-line>ScheduleBot:</span>
-        <span mat-line>create new event</span>
-    </a>
-    <a mat-list-item (click)="openLink($event)">
-        <span mat-line>Complex diagnostic Bot:</span>
-        <span mat-line>start new complex diagnostic</span>
+<h3>new item creation</h3>
+<!-- <pre>{{ newItemCreation$ | async | json }}</pre> -->
+<mat-nav-list *ngFor="let one of newItemCreation$ | async as list">
+    <span
+        ><b>{{ one.bot.displayName }}</b></span
+    >
+    <a
+        mat-list-item
+        *ngFor="let item of one.items"
+        (click)="createNewItem(one.bot, item)"
+    >
+        <span mat-line [title]="item.description">{{ item.text }}</span>
     </a>
 </mat-nav-list>

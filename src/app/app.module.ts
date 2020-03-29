@@ -19,7 +19,6 @@ import { AboutComponent } from './pages/public/about/about.component';
 import { ForbiddenComponent } from './pages/public/forbidden/forbidden.component';
 import { NotFoundComponent } from './pages/public/not-found/not-found.component';
 
-import { CabinetComponent } from './pages/private/cabinet/cabinet.component';
 import { BotsComponent } from './pages/private/my-bots/bots.component';
 import { PrivateModule } from './pages/private/privatePage.module';
 import { ShareModule } from './share/share.module';
@@ -32,7 +31,6 @@ import { ShareModule } from './share/share.module';
         AboutComponent,
         ForbiddenComponent,
         NotFoundComponent,
-        CabinetComponent,
         BotsComponent
     ],
     imports: [

@@ -1,0 +1,25 @@
+:host {
+    display: flex;
+    flex-direction: column;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+}
+.content-header {
+    padding: 7px 0 7px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: blanchedalmond;
+    border-bottom: solid 1px gray;
+}
+.content-body {
+    flex: auto 1 1;
+}
+.content-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px 0 10px 0;
+}
